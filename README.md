@@ -1,3 +1,8 @@
+**Please note:** This is a fork of the bearerjs repository of sanqianpiao: [original project.](https://github.com/sanqianpiao/bearerjs)
+This repository offers two changes:
+1. validateToken is handled as async function, such that you can do e.g. database queries to prove certain aspect of the request.
+2. Check for cookie authorization was removed since it caused an error when a non-secure route was called and no cookie was provided.
+
 BearerJS
 ========
 
