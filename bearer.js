@@ -37,10 +37,10 @@ function decryptToken(settings){
 
 function bearerJS(settings) {
     //Check if URL should be authenticated and redirect accordingly
-    settings.app.use(function (req, res, next) {
+    settings.app.use(async function (req, res, next) {
         //var bearer=req.get('Authorization');
 
-        var bearer = req.get('Authorization') || req.cookies['' + settings.cookieName + ''];
+        var bearer = req.get('Authorization');
         
         var token;
         if (bearer){
@@ -74,9 +74,9 @@ function bearerJS(settings) {
         var routeCheck=checkUrl(req.url,req.method.toLowerCase(),settings.secureRoutes);
         if (routeCheck){
             if (token){
-                var tokenValid=settings.validateToken(req,token);
+                var tokenValid= await settings.validateToken(req,token);
                 if (!tokenValid){
-                    cancel(401, "Token expired");
+                    cancel(401, "Token expired or not valid");
                 }else //Authorized request
                 {
                     if (settings.onTokenValid){
