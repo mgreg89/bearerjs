@@ -155,4 +155,7 @@ function bearerJS(settings) {
     });
 }
 
-module.exports = bearerJS;
+module.exports = {
+    bearer: bearerJS,
+    decryptToken: decryptToken
+};
